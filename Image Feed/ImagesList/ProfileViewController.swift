@@ -17,6 +17,5 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        exitButton.titleLabel?.text = ""
     }
 }
