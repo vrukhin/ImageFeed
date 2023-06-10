@@ -9,11 +9,11 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
 
-    var avatarImage: UIImageView!
-    var exitButton: UIButton!
-    var nameLabel: UILabel!
-    var usernameLabel: UILabel!
-    var textLabel: UILabel!
+    private var avatarImage: UIImageView!
+    private var exitButton: UIButton!
+    private var nameLabel: UILabel!
+    private var usernameLabel: UILabel!
+    private var textLabel: UILabel!
     
     private func exitButtonDidTap() {
         
