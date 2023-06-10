@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E6FB7A72A34392D002185B3 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6FB7A62A34392D002185B3 /* SingleImageViewController.swift */; };
 		4EC0D2D32A33AC4100E8DF3C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0D2D22A33AC4100E8DF3C /* ProfileViewController.swift */; };
 		7D3DFB1528DDF696005A13F3 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3DFB1328DDF696005A13F3 /* ImagesListCell.swift */; };
 		7D3DFB1628DDF696005A13F3 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3DFB1428DDF696005A13F3 /* ImagesListViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E6FB7A62A34392D002185B3 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		4EC0D2D22A33AC4100E8DF3C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7D3DFB1328DDF696005A13F3 /* ImagesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		7D3DFB1428DDF696005A13F3 /* ImagesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				7D3DFB1328DDF696005A13F3 /* ImagesListCell.swift */,
 				7D3DFB1428DDF696005A13F3 /* ImagesListViewController.swift */,
 				4EC0D2D22A33AC4100E8DF3C /* ProfileViewController.swift */,
+				4E6FB7A62A34392D002185B3 /* SingleImageViewController.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 				7D9CFA4528DDEE7F00D971A7 /* SceneDelegate.swift in Sources */,
 				4EC0D2D32A33AC4100E8DF3C /* ProfileViewController.swift in Sources */,
 				7D3DFB1628DDF696005A13F3 /* ImagesListViewController.swift in Sources */,
+				4E6FB7A72A34392D002185B3 /* SingleImageViewController.swift in Sources */,
 				7D3DFB1528DDF696005A13F3 /* ImagesListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
