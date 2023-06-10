@@ -223,6 +223,9 @@
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="6gL-Pu-hgA"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="DHG-5B-30S"/>
+                                <connections>
+                                    <outlet property="delegate" destination="APQ-f3-gwT" id="imj-8O-tPO"/>
+                                </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVA-1c-qlV">
                                 <rect key="frame" x="8" y="56" width="24" height="24"/>
