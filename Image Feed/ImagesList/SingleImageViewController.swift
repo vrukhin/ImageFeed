@@ -18,6 +18,14 @@ final class SingleImageViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    @IBAction private func didTabShareButton(_ sender: Any) {
+        let share = UIActivityViewController(
+            activityItems: [image],
+            applicationActivities: nil
+        )
+        present(share, animated: true, completion: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = image

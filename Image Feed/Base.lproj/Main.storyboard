@@ -239,6 +239,18 @@
                                     <action selector="didTapBackButton:" destination="APQ-f3-gwT" eventType="touchUpInside" id="czQ-PR-QT5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEI-X7-RHL">
+                                <rect key="frame" x="182" y="796" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="SIQ-CL-PfC"/>
+                                    <constraint firstAttribute="height" constant="50" id="qu6-fy-cd4"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="share_button"/>
+                                <connections>
+                                    <action selector="didTabShareButton:" destination="APQ-f3-gwT" eventType="touchUpInside" id="zpE-5Q-Esl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lJf-RQ-Gt6"/>
                         <color key="backgroundColor" name="YP Black"/>
@@ -247,8 +259,10 @@
                             <constraint firstItem="FCZ-Vs-bS3" firstAttribute="leading" secondItem="lJf-RQ-Gt6" secondAttribute="leading" id="MhV-3e-lj4"/>
                             <constraint firstItem="FCZ-Vs-bS3" firstAttribute="top" secondItem="572-wj-Ttp" secondAttribute="top" id="UHN-af-APx"/>
                             <constraint firstItem="UVA-1c-qlV" firstAttribute="top" secondItem="572-wj-Ttp" secondAttribute="top" constant="56" id="cOw-ug-JXd"/>
+                            <constraint firstItem="lJf-RQ-Gt6" firstAttribute="bottom" secondItem="UEI-X7-RHL" secondAttribute="bottom" constant="50" id="ldo-Vg-c6e"/>
                             <constraint firstItem="lJf-RQ-Gt6" firstAttribute="trailing" secondItem="FCZ-Vs-bS3" secondAttribute="trailing" id="nEW-Yu-DTZ"/>
                             <constraint firstAttribute="bottom" secondItem="FCZ-Vs-bS3" secondAttribute="bottom" id="pWK-TS-TRE"/>
+                            <constraint firstItem="UEI-X7-RHL" firstAttribute="centerX" secondItem="572-wj-Ttp" secondAttribute="centerX" id="v2w-y3-ICP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3yF-aO-KOx"/>
@@ -270,6 +284,7 @@
         <image name="back_button" width="9" height="16"/>
         <image name="exit_button" width="20" height="22"/>
         <image name="like_button_on" width="42" height="42"/>
+        <image name="share_button" width="22" height="21"/>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
