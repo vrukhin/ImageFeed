@@ -21,13 +21,13 @@
                         <color key="selectedImageTintColor" name="YP White"/>
                     </tabBar>
                     <connections>
-                        <segue destination="cE5-KX-RZe" kind="relationship" relationship="viewControllers" id="6cP-wq-H8f"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="gBD-ah-k4d"/>
                         <segue destination="9uk-Ey-UeC" kind="relationship" relationship="viewControllers" id="nGb-Oi-S8a"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2k5-gm-Pq5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-888" y="417"/>
+            <point key="canvasLocation" x="-123" y="406"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Ooa-4r-nlp">
@@ -110,7 +110,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iWr-g2-6wz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="61" y="761"/>
+            <point key="canvasLocation" x="971" y="763"/>
         </scene>
         <!--ImageList-->
         <scene sceneID="tne-QT-ifu">
@@ -189,59 +189,50 @@
                             <constraint firstAttribute="top" secondItem="0ZD-Gs-GgP" secondAttribute="top" id="l0f-Ng-QVT"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="TabEditorialActive" id="KEN-2z-AsP"/>
                     <navigationItem key="navigationItem" id="Nw9-f6-hUP"/>
                     <connections>
                         <outlet property="tableView" destination="0ZD-Gs-GgP" id="Fuw-16-5ad"/>
-                        <segue destination="APQ-f3-gwT" kind="show" identifier="ShowSingleImage" id="q4D-Wj-vml"/>
+                        <segue destination="APQ-f3-gwT" kind="presentation" identifier="ShowSingleImage" id="q4D-Wj-vml"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="971.01449275362324" y="92.410714285714278"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="5oM-z0-dKA">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cE5-KX-RZe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="TabEditorialActive" id="jPe-qO-cHd"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hW6-QM-znJ">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" name="YP White"/>
-                        <color key="barTintColor" name="YP White"/>
-                        <navigationBarAppearance key="standardAppearance">
-                            <color key="backgroundColor" name="YP Black"/>
-                        </navigationBarAppearance>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="FCy-RU-EPh"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dYj-5r-nd0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="60.869565217391312" y="92.410714285714278"/>
-        </scene>
         <!--Single Image-->
         <scene sceneID="cl7-zm-BSR">
             <objects>
-                <viewController title="Single Image" id="APQ-f3-gwT" userLabel="Single Image" customClass="SingleImageViewController" customModule="Image_Feed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Single Image" modalPresentationStyle="fullScreen" id="APQ-f3-gwT" userLabel="Single Image" customClass="SingleImageViewController" customModule="Image_Feed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="572-wj-Ttp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="zLf-pa-c2u">
-                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVA-1c-qlV">
+                                <rect key="frame" x="8" y="56" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="L8P-lI-lF1"/>
+                                    <constraint firstAttribute="height" constant="24" id="h2F-cq-nSe"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="back_button"/>
+                                <connections>
+                                    <action selector="didTapBackButton:" destination="APQ-f3-gwT" eventType="touchUpInside" id="czQ-PR-QT5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lJf-RQ-Gt6"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="zLf-pa-c2u" firstAttribute="top" secondItem="lJf-RQ-Gt6" secondAttribute="top" id="9Qi-ch-97U"/>
-                            <constraint firstItem="zLf-pa-c2u" firstAttribute="trailing" secondItem="lJf-RQ-Gt6" secondAttribute="trailing" id="Eng-TN-Set"/>
-                            <constraint firstItem="zLf-pa-c2u" firstAttribute="leading" secondItem="lJf-RQ-Gt6" secondAttribute="leading" id="Xnb-6H-hAn"/>
-                            <constraint firstItem="lJf-RQ-Gt6" firstAttribute="bottom" secondItem="zLf-pa-c2u" secondAttribute="bottom" id="sPP-M5-Esi"/>
+                            <constraint firstItem="zLf-pa-c2u" firstAttribute="top" secondItem="572-wj-Ttp" secondAttribute="top" id="9Qi-ch-97U"/>
+                            <constraint firstItem="zLf-pa-c2u" firstAttribute="trailing" secondItem="572-wj-Ttp" secondAttribute="trailing" id="Eng-TN-Set"/>
+                            <constraint firstItem="UVA-1c-qlV" firstAttribute="leading" secondItem="572-wj-Ttp" secondAttribute="leading" constant="8" id="HcR-nr-dYJ"/>
+                            <constraint firstItem="zLf-pa-c2u" firstAttribute="leading" secondItem="572-wj-Ttp" secondAttribute="leading" id="Xnb-6H-hAn"/>
+                            <constraint firstItem="UVA-1c-qlV" firstAttribute="top" secondItem="572-wj-Ttp" secondAttribute="top" constant="56" id="cOw-ug-JXd"/>
+                            <constraint firstAttribute="bottom" secondItem="zLf-pa-c2u" secondAttribute="bottom" id="sPP-M5-Esi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3yF-aO-KOx"/>
@@ -259,6 +250,7 @@
         <image name="TabEditorialActive" width="20" height="22"/>
         <image name="TabProfileActive" width="24" height="24"/>
         <image name="avatar" width="70" height="70"/>
+        <image name="back_button" width="9" height="16"/>
         <image name="exit_button" width="20" height="22"/>
         <image name="like_button_on" width="42" height="42"/>
         <namedColor name="YP Black">
