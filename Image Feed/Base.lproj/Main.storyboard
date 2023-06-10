@@ -209,9 +209,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FCZ-Vs-bS3">
-                                <rect key="frame" x="-20" y="0.0" width="454" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="zLf-pa-c2u">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="zLf-pa-c2u">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="132"/>
                                     </imageView>
                                 </subviews>
@@ -244,10 +244,10 @@
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="UVA-1c-qlV" firstAttribute="leading" secondItem="572-wj-Ttp" secondAttribute="leading" constant="8" id="HcR-nr-dYJ"/>
-                            <constraint firstItem="FCZ-Vs-bS3" firstAttribute="leading" secondItem="lJf-RQ-Gt6" secondAttribute="leading" constant="-20" id="MhV-3e-lj4"/>
+                            <constraint firstItem="FCZ-Vs-bS3" firstAttribute="leading" secondItem="lJf-RQ-Gt6" secondAttribute="leading" id="MhV-3e-lj4"/>
                             <constraint firstItem="FCZ-Vs-bS3" firstAttribute="top" secondItem="572-wj-Ttp" secondAttribute="top" id="UHN-af-APx"/>
                             <constraint firstItem="UVA-1c-qlV" firstAttribute="top" secondItem="572-wj-Ttp" secondAttribute="top" constant="56" id="cOw-ug-JXd"/>
-                            <constraint firstItem="lJf-RQ-Gt6" firstAttribute="trailing" secondItem="FCZ-Vs-bS3" secondAttribute="trailing" constant="-20" id="nEW-Yu-DTZ"/>
+                            <constraint firstItem="lJf-RQ-Gt6" firstAttribute="trailing" secondItem="FCZ-Vs-bS3" secondAttribute="trailing" id="nEW-Yu-DTZ"/>
                             <constraint firstAttribute="bottom" secondItem="FCZ-Vs-bS3" secondAttribute="bottom" id="pWK-TS-TRE"/>
                         </constraints>
                     </view>
