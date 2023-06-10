@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="APQ-f3-gwT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xyj-WI-gtG">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -171,6 +171,7 @@
                                             <outlet property="cellImage" destination="UHT-CC-7rY" id="m9i-Vu-M30"/>
                                             <outlet property="dateLabel" destination="zZ7-qv-kLf" id="v4s-uC-ojU"/>
                                             <outlet property="likeButton" destination="sdE-8c-JJO" id="qI9-Lz-Dgp"/>
+                                            <segue destination="APQ-f3-gwT" kind="show" id="NdT-Ge-IUs"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -227,11 +228,11 @@
             <objects>
                 <viewController title="Single Image" id="APQ-f3-gwT" userLabel="Single Image" customClass="SingleImageViewController" customModule="Image_Feed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="572-wj-Ttp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="zLf-pa-c2u">
-                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lJf-RQ-Gt6"/>
@@ -243,13 +244,14 @@
                             <constraint firstItem="lJf-RQ-Gt6" firstAttribute="bottom" secondItem="zLf-pa-c2u" secondAttribute="bottom" id="sPP-M5-Esi"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="3yF-aO-KOx"/>
                     <connections>
                         <outlet property="imageView" destination="zLf-pa-c2u" id="RSn-dK-2L4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="swl-3X-Kio" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1610" y="417"/>
+            <point key="canvasLocation" x="1854" y="92"/>
         </scene>
     </scenes>
     <resources>
