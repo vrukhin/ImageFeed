@@ -15,6 +15,12 @@ final class ProfileViewController: UIViewController {
     private var usernameLabel: UILabel!
     private var textLabel: UILabel!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        createProfileView()
+        createConstraints()
+    }
+    
     private func exitButtonDidTap() {
         
     }
@@ -77,11 +83,5 @@ final class ProfileViewController: UIViewController {
             textLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 8),
             textLabel.leadingAnchor.constraint(equalTo: avatarImage.leadingAnchor),
         ])
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        createProfileView()
-        createConstraints()
     }
 }
