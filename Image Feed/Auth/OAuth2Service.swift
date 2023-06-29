@@ -18,7 +18,7 @@ final class OAuth2Service {
             return OAuthTokenStorage().token
         }
         set {
-            return OAuthTokenStorage().token = newValue
+            return OAuthTokenStorage().token = newValue!
         }
     }
     
