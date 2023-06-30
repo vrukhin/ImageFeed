@@ -11,6 +11,8 @@ final class AuthViewController: UIViewController {
     
     private let ShowWebViewSegueIdentifier = "ShowWebView"
     
+    weak var delegate: AuthViewControllerDelegate?
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == ShowWebViewSegueIdentifier {
             guard
@@ -26,19 +28,10 @@ final class AuthViewController: UIViewController {
 extension AuthViewController: WebViewViewControllerDelegate {
     
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        OAuth2Service.shared.fetchAuthToken(code) { result in
-            switch result {
-            case .success(let token):
-                print("This is your token:\n\(token)")
-            case .failure(let error):
-                print(error)
-            }
-        }
+        delegate?.authViewController(self, didAuthenticate: code)
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true)
     }
-    
-    
 }
