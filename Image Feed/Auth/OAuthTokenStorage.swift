@@ -11,9 +11,9 @@ final class OAuthTokenStorage {
     
     private let userDefaults = UserDefaults.standard
     
-    var token: String {
+    var token: String? {
         get {
-            return userDefaults.string(forKey: "token") ?? "Token not found"
+            return userDefaults.string(forKey: "token")
         }
         
         set {
