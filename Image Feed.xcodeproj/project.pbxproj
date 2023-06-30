@@ -76,9 +76,6 @@
 				4EB017E22A4F7E8900C3BA04 /* AuthViewControllerDelegate.swift */,
 				4EB017C92A478DEA00C3BA04 /* WebViewViewController.swift */,
 				4EB017CB2A48B1D200C3BA04 /* WebViewViewControllerDelegate.swift */,
-				4EB017D02A4B6EE800C3BA04 /* OAuth2Service.swift */,
-				4EB017DD2A4E0CFD00C3BA04 /* OAuthTokenStorage.swift */,
-				4EB017E02A4F763200C3BA04 /* SplashViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -119,6 +116,23 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		4EB017E42A4F8B9800C3BA04 /* SplashViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4EB017E02A4F763200C3BA04 /* SplashViewController.swift */,
+			);
+			path = SplashViewController;
+			sourceTree = "<group>";
+		};
+		4EB017E52A4F8BB100C3BA04 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4EB017D02A4B6EE800C3BA04 /* OAuth2Service.swift */,
+				4EB017DD2A4E0CFD00C3BA04 /* OAuthTokenStorage.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		7D9CFA3628DDEE7F00D971A7 = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +153,8 @@
 		7D9CFA4128DDEE7F00D971A7 /* Image Feed */ = {
 			isa = PBXGroup;
 			children = (
+				4EB017E52A4F8BB100C3BA04 /* Services */,
+				4EB017E42A4F8B9800C3BA04 /* SplashViewController */,
 				4EB017DF2A4E1B3100C3BA04 /* Profile */,
 				4EB017CD2A4B6D2200C3BA04 /* Models */,
 				4EB017C62A478BD700C3BA04 /* Auth */,
