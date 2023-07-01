@@ -269,7 +269,7 @@
                             <constraint firstAttribute="top" secondItem="0ZD-Gs-GgP" secondAttribute="top" id="l0f-Ng-QVT"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="TabEditorialActive" id="KEN-2z-AsP"/>
+                    <tabBarItem key="tabBarItem" title="" image="TabEditorialActive" id="KEN-2z-AsP"/>
                     <navigationItem key="navigationItem" id="Nw9-f6-hUP"/>
                     <connections>
                         <outlet property="tableView" destination="0ZD-Gs-GgP" id="Fuw-16-5ad"/>
