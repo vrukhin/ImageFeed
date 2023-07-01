@@ -7,8 +7,6 @@
 
 import Foundation
 
-fileprivate let DefaultBaseUrl = URL(string: "https://unsplash.com")!
-
 extension URLRequest {
     static func makeHTTPRequest(
         path: String,
