@@ -81,7 +81,7 @@ extension OAuth2Service {
             + "&&code=\(code)"
             + "&&grant_type=authorization_code",
             httpMethod: "POST",
-            baseURL: URL(string: "https://unsplash.com")!
+            baseURL: Credentials.DefaultBaseUrl
         )
     }
 }
