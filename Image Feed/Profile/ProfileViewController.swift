@@ -15,17 +15,31 @@ final class ProfileViewController: UIViewController {
     private var usernameLabel: UILabel!
     private var textLabel: UILabel!
     
+    private let profileService = ProfileService.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        createProfileView()
-        createConstraints()
+        if let token = OAuthTokenStorage().token {
+            profileService.fetchProfile(token: token) { [weak self] result in
+                guard self == self else { return }
+                switch result {
+                case .success(let profileData):
+                    self?.createProfileView(with: profileData)
+                    self?.createConstraints()
+                case .failure:
+                    break
+                }
+            }
+        }
+        //createProfileView()
+        //createConstraints()
     }
     
     private func exitButtonDidTap() {
         
     }
     
-    private func createProfileView() {
+    private func createProfileView(with profileData: Profile) {
 
         let image = UIImage(systemName: "person.crop.circle.fill")
         avatarImage = UIImageView(image: image)
@@ -39,21 +53,21 @@ final class ProfileViewController: UIViewController {
         view.addSubview(exitButton)
         
         nameLabel = UILabel()
-        nameLabel.text = "Екатерина Новикова"
+        nameLabel.text = profileData.name
         nameLabel.font = .systemFont(ofSize: 23, weight: .bold)
         nameLabel.textColor = .ypWhite
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nameLabel)
         
         usernameLabel = UILabel()
-        usernameLabel.text = "@ekaterina_nov"
+        usernameLabel.text = profileData.login
         usernameLabel.font = .systemFont(ofSize: 13, weight: .regular)
         usernameLabel.textColor = .ypGray
         usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(usernameLabel)
         
         textLabel = UILabel()
-        textLabel.text = "Hello World!!!"
+        textLabel.text = profileData.bio
         textLabel.font = .systemFont(ofSize: 13, weight: .regular)
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.textColor = .ypWhite
