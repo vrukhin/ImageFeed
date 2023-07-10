@@ -10,6 +10,7 @@ import Foundation
 final class ProfileService {
     
     static let shared = ProfileService()
+    private(set) var profile: Profile?
     
     private let path = "/me"
     private let urlSession = URLSession.shared
@@ -22,6 +23,7 @@ final class ProfileService {
             switch result {
             case .success(let response):
                 let profileData = response.convert()
+                profile = profileData
                 completion(.success(profileData))
             case .failure(let error):
                 completion(.failure(error))
