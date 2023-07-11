@@ -22,7 +22,7 @@ final class ProfileImageService {
         var request = profileImageURLRequest(path: "\(self.path)/\(username)")
         let token = self.tokenStorage.token ?? ""
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        let task = object(for: request) { [weak self] result in
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<UserResponse, Error>) in
             guard let self = self else { return }
             switch result {
             case .success(let response):
@@ -44,21 +44,6 @@ final class ProfileImageService {
 }
 
 extension ProfileImageService {
-    
-    func object(
-        for request: URLRequest,
-        completion: @escaping (Result<UserResponse, Error>) -> Void
-    ) -> URLSessionTask {
-        let decoder = JSONDecoder()
-        return urlSession.data(for: request) { (result: Result<Data, Error>) in
-            let response = result.flatMap { data -> Result<UserResponse, Error> in
-                Result {
-                    try decoder.decode(UserResponse.self, from: data)
-                }
-            }
-            completion(response)
-        }
-    }
     
     func profileImageURLRequest(path: String) -> URLRequest {
         URLRequest.makeHTTPRequest(path: path, httpMethod: "GET", baseURL: Credentials.DefaultApiUrl)
