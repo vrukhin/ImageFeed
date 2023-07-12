@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
 
@@ -30,7 +31,6 @@ final class ProfileViewController: UIViewController {
                 guard let self = self else { return }
                 updateAvatar()
             }
-        updateAvatar()
         createProfileView()
         createConstraints()
         updateProfileDetails()
@@ -46,6 +46,7 @@ final class ProfileViewController: UIViewController {
             usernameLabel.text = profile.login
             textLabel.text = profile.bio
         }
+        updateAvatar()
     }
     
     private func updateAvatar() {
@@ -53,12 +54,17 @@ final class ProfileViewController: UIViewController {
             let profileImageURL = ProfileImageService.shared.avatarURL,
             let url = URL(string: profileImageURL)
         else { return }
+        let processor = RoundCornerImageProcessor(cornerRadius: 16)
+        avatarImage.kf.setImage(
+            with: url,
+            placeholder: UIImage(systemName: "person.crop.circle.fill"),
+            options: [.processor(processor)]
+        )
     }
     
     private func createProfileView() {
 
-        let image = UIImage(systemName: "person.crop.circle.fill")
-        avatarImage = UIImageView(image: image)
+        avatarImage = UIImageView()
         avatarImage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(avatarImage)
 
