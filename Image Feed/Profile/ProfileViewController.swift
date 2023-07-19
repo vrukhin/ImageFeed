@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
 
@@ -15,21 +16,56 @@ final class ProfileViewController: UIViewController {
     private var usernameLabel: UILabel!
     private var textLabel: UILabel!
     
+    private let profileService = ProfileService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ProfileImageService.DidChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                updateAvatar()
+            }
         createProfileView()
         createConstraints()
+        updateProfileDetails()
     }
     
     private func exitButtonDidTap() {
         
     }
     
+    private func updateProfileDetails() {
+        if let profile = profileService.profile {
+            nameLabel.text = profile.name
+            usernameLabel.text = profile.login
+            textLabel.text = profile.bio
+        }
+        updateAvatar()
+    }
+    
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL)
+        else { return }
+        avatarImage.kf.setImage(
+            with: url,
+            placeholder: UIImage(systemName: "person.crop.circle.fill")
+        )
+    }
+    
     private func createProfileView() {
 
-        let image = UIImage(systemName: "person.crop.circle.fill")
-        avatarImage = UIImageView(image: image)
+        avatarImage = UIImageView()
         avatarImage.translatesAutoresizingMaskIntoConstraints = false
+        avatarImage.layer.cornerRadius = 35
+        avatarImage.layer.masksToBounds = true
         view.addSubview(avatarImage)
 
         let buttonImage = UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage()
@@ -39,21 +75,18 @@ final class ProfileViewController: UIViewController {
         view.addSubview(exitButton)
         
         nameLabel = UILabel()
-        nameLabel.text = "Екатерина Новикова"
         nameLabel.font = .systemFont(ofSize: 23, weight: .bold)
         nameLabel.textColor = .ypWhite
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nameLabel)
         
         usernameLabel = UILabel()
-        usernameLabel.text = "@ekaterina_nov"
         usernameLabel.font = .systemFont(ofSize: 13, weight: .regular)
         usernameLabel.textColor = .ypGray
         usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(usernameLabel)
         
         textLabel = UILabel()
-        textLabel.text = "Hello World!!!"
         textLabel.font = .systemFont(ofSize: 13, weight: .regular)
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.textColor = .ypWhite
