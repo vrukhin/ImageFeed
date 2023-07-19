@@ -41,6 +41,8 @@ final class ProfileImageService {
         }
         task.resume()
     }
+    
+    private init() {}
 }
 
 extension ProfileImageService {

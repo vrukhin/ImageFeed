@@ -31,6 +31,8 @@ final class ProfileService {
         }
         task.resume()
     }
+    
+    private init() {}
 }
 
 extension ProfileService {
