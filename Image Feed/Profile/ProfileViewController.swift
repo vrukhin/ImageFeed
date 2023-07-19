@@ -54,11 +54,9 @@ final class ProfileViewController: UIViewController {
             let profileImageURL = ProfileImageService.shared.avatarURL,
             let url = URL(string: profileImageURL)
         else { return }
-        let processor = RoundCornerImageProcessor(cornerRadius: 16)
         avatarImage.kf.setImage(
             with: url,
-            placeholder: UIImage(systemName: "person.crop.circle.fill"),
-            options: [.processor(processor)]
+            placeholder: UIImage(systemName: "person.crop.circle.fill")
         )
     }
     
@@ -66,6 +64,8 @@ final class ProfileViewController: UIViewController {
 
         avatarImage = UIImageView()
         avatarImage.translatesAutoresizingMaskIntoConstraints = false
+        avatarImage.layer.cornerRadius = 35
+        avatarImage.layer.masksToBounds = true
         view.addSubview(avatarImage)
 
         let buttonImage = UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage()
