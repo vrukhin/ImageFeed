@@ -9,7 +9,7 @@ import UIKit
 
 final class SplashViewController: UIViewController {
     
-    private var logo: UIImageView!
+    private var logoImageView: UIImageView!
     
     private let ShowAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreenSegue"
     
@@ -37,14 +37,14 @@ final class SplashViewController: UIViewController {
     private func createSplashView() {
         view.backgroundColor = .ypBlack
         
-        logo = UIImageView()
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(logo)
-        logo.image = UIImage(named: "splash_screen_logo")
+        logoImageView = UIImageView()
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(logoImageView)
+        logoImageView.image = UIImage(named: "splash_screen_logo")
         
         NSLayoutConstraint.activate([
-            logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logo.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
         
     }
