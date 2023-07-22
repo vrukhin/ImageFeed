@@ -10,7 +10,7 @@ import Foundation
 final class OAuth2Service {
     
     static let shared = OAuth2Service()
-    private let tokenStorage = OAuthTokenStorage()
+    private let tokenStorage = OAuthTokenStorage.shared
     
     private let urlSession = URLSession.shared
     

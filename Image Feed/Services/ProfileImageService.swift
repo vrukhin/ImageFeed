@@ -14,7 +14,7 @@ final class ProfileImageService {
     static let shared = ProfileImageService()
     private(set) var avatarURL: String?
     
-    private let tokenStorage = OAuthTokenStorage()
+    private let tokenStorage = OAuthTokenStorage.shared
     private let path = "/users"
     private let urlSession = URLSession.shared
     
