@@ -15,11 +15,14 @@ final class ImagesListService {
     private (set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
     
+    private var task: URLSessionTask?
     private let tokenStorage = OAuthTokenStorage.shared
     private let urlSession = URLSession.shared
     private let path = "/photos"
     
     func fetchPhotosNextPage(completion: @escaping (Result<[Photo], Error>) -> Void) {
+        assert(Thread.isMainThread)
+        task?.cancel()
         let nextPage = lastLoadedPage == nil
         ? 1
         : lastLoadedPage! + 1
@@ -35,6 +38,7 @@ final class ImagesListService {
                     photos.append(photo.convert())
                 }
                 completion(.success(photos))
+                self.task = nil
                 NotificationCenter.default
                     .post(
                         name: ImagesListService.DidChangeNotification,
@@ -45,6 +49,7 @@ final class ImagesListService {
                 completion(.failure(error))
             }
         }
+        self.task = task
         task.resume()
     }
     
