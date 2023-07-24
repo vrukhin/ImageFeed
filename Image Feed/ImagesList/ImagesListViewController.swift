@@ -76,9 +76,7 @@ extension ImagesListViewController {
             let url = URL(string: imageURL)
         else { return }
 
-        cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "Stub")) {_ in
-            self.tableView.reloadRows(at: [indexPath], with: .automatic)
-        }
+        cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "Stub"))
         cell.dateLabel.text = dateFormatter.string(from: photos[indexPath.row].createdAt ?? Date())
 
         let isLiked = indexPath.row % 2 != 0
