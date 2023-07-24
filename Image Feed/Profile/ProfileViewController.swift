@@ -16,6 +16,7 @@ final class ProfileViewController: UIViewController {
     private var usernameLabel: UILabel!
     private var textLabel: UILabel!
     
+    private let authService = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     
@@ -36,8 +37,10 @@ final class ProfileViewController: UIViewController {
         updateProfileDetails()
     }
     
-    private func exitButtonDidTap() {
-        
+    @objc private func exitButtonDidTap(_ sender: UIButton!) {
+        authService.clean()
+        self.window.rootViewController = SplashViewController()
+        self.window.makeKeyAndVisible()
     }
     
     private func updateProfileDetails() {
@@ -72,6 +75,7 @@ final class ProfileViewController: UIViewController {
         exitButton = UIButton.systemButton(with: buttonImage, target: self, action: nil)
         exitButton.tintColor = .ypRed
         exitButton.translatesAutoresizingMaskIntoConstraints = false
+        exitButton.addTarget(self, action: #selector(self.exitButtonDidTap), for: .touchUpInside)
         view.addSubview(exitButton)
         
         nameLabel = UILabel()

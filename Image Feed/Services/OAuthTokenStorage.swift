@@ -18,7 +18,10 @@ final class OAuthTokenStorage {
         }
         
         set {
-            guard let token = newValue else { return }
+            guard let token = newValue else {
+                KeychainWrapper.standard.removeObject(forKey: "Auth token")
+                return
+            }
             KeychainWrapper.standard.set(token, forKey: "Auth token")
         }
     }
