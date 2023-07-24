@@ -53,6 +53,35 @@ final class ImagesListService {
         task.resume()
     }
     
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        assert(Thread.isMainThread)
+        task?.cancel()
+        var request = changeLikeRequest(photoId: photoId, isLike: isLike)
+        let token = tokenStorage.token ?? ""
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<LikePhotoResponse, Error>) in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                if let index = photos.firstIndex(where: { $0.id == photoId }) {
+                    let photo = photos[index]
+                    let newPhoto = Photo(
+                        id: photo.id,
+                        size: photo.size,
+                        createdAt: photo.createdAt,
+                        welcomeDescription: photo.welcomeDescription,
+                        thumbImageURL: photo.thumbImageURL,
+                        largeImageURL: photo.largeImageURL,
+                        isLiked: !photo.isLiked)
+                    self.photos[index] = newPhoto
+                }
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        task.resume()
+    }
     private init() {}
 }
 
@@ -62,6 +91,15 @@ extension ImagesListService {
             path: self.path
             + "?page=\(page)",
             httpMethod: "GET",
+            baseURL: Credentials.DefaultApiUrl
+        )
+    }
+    
+    func changeLikeRequest(photoId: String, isLike: Bool) -> URLRequest {
+        URLRequest.makeHTTPRequest(
+            path: self.path
+            + "/\(photoId)/like",
+            httpMethod: isLike ? "POST" : "DELETE",
             baseURL: Credentials.DefaultApiUrl
         )
     }
