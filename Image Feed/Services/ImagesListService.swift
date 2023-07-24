@@ -20,7 +20,7 @@ final class ImagesListService {
     private let urlSession = URLSession.shared
     private let path = "/photos"
     
-    func fetchPhotosNextPage(completion: @escaping (Result<[Photo], Error>) -> Void) {
+    func fetchPhotosNextPage(_ completion: @escaping (_ error: Error) -> Void) {
         assert(Thread.isMainThread)
         task?.cancel()
         let nextPage = lastLoadedPage == nil
@@ -33,11 +33,11 @@ final class ImagesListService {
             guard let self = self else { return }
             switch result {
             case .success(let response):
+                lastLoadedPage = nextPage
                 let photosData = response
                 for photo in photosData {
                     photos.append(photo.convert())
                 }
-                completion(.success(photos))
                 self.task = nil
                 NotificationCenter.default
                     .post(
@@ -46,7 +46,7 @@ final class ImagesListService {
                         userInfo: ["photos":self.photos]
                     )
             case .failure(let error):
-                completion(.failure(error))
+                completion(error)
             }
         }
         self.task = task

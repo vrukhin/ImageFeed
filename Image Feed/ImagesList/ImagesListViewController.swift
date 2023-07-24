@@ -6,6 +6,10 @@ final class ImagesListViewController: UIViewController {
 
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    private var photos: [Photo] = []
+    
+    private let imagesListService = ImagesListService.shared
+    private var imagesListServiceObserver: NSObjectProtocol?
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -28,13 +32,36 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        
+        imagesListServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ImagesListService.DidChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                updateTableViewAnimated()
+                UIBlockingProgressHUD.dismiss()
+            }
+        
+        UIBlockingProgressHUD.show()
+        imagesListService.fetchPhotosNextPage { [weak self] error in
+            guard let self = self else { return }
+            let alert = UIAlertController(
+                title: "Не удалось загрузить фото",
+                message: "\(error.localizedDescription)",
+                preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
 extension ImagesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photosName.count
+        return photos.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,12 +80,14 @@ extension ImagesListViewController: UITableViewDataSource {
 extension ImagesListViewController {
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        guard let image = UIImage(named: photosName[indexPath.row]) else {
-            return
-        }
+        guard
+            let imageURL = photos[indexPath.row].thumbImageURL,
+            let url = URL(string: imageURL)
+        else { return }
 
-        cell.cellImage.image = image
-        cell.dateLabel.text = dateFormatter.string(from: Date())
+        cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "Stub"))
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        cell.dateLabel.text = dateFormatter.string(from: photos[indexPath.row].createdAt ?? Date())
 
         let isLiked = indexPath.row % 2 != 0
         let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
@@ -73,14 +102,51 @@ extension ImagesListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let image = UIImage(named: photosName[indexPath.row]) else {
+        guard let image = UIImage(named: "Stub") else {
             return 0
         }
+//        guard
+//            let cell = tableView.cellForRow(at: indexPath) as? ImagesListCell,
+//            let image = cell.cellImage.image
+//        else { return 0 }
+        
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
         let imageWidth = image.size.width
         let scale = imageViewWidth / imageWidth
         let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == photos.count - 1 {
+            imagesListService.fetchPhotosNextPage { [weak self] error in
+                guard let self = self else { return }
+                let alert = UIAlertController(
+                    title: "Не удалось загрузить фото",
+                    message: "\(error.localizedDescription)",
+                    preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+}
+
+extension ImagesListViewController {
+    private func updateTableViewAnimated() {
+        let oldCount = photos.count
+        let newCount = imagesListService.photos.count
+        photos = imagesListService.photos
+        
+        if oldCount != newCount {
+            tableView.performBatchUpdates {
+                let indexPaths = (oldCount..<newCount).map { i in
+                    IndexPath(row: i, section: 0)
+                }
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            } completion: { _ in }
+        }
     }
 }
