@@ -76,8 +76,9 @@ extension ImagesListViewController {
             let url = URL(string: imageURL)
         else { return }
 
-        cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "Stub"))
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "Stub")) {_ in
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
         cell.dateLabel.text = dateFormatter.string(from: photos[indexPath.row].createdAt ?? Date())
 
         let isLiked = indexPath.row % 2 != 0
@@ -93,19 +94,12 @@ extension ImagesListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let image = UIImage(named: "Stub") else {
-            return 0
-        }
-//        guard
-//            let cell = tableView.cellForRow(at: indexPath) as? ImagesListCell,
-//            let image = cell.cellImage.image
-//        else { return 0 }
-        
+
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
-        let imageWidth = image.size.width
+        let imageWidth = photos[indexPath.row].size.width
         let scale = imageViewWidth / imageWidth
-        let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
+        let cellHeight = photos[indexPath.row].size.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
     }
     
