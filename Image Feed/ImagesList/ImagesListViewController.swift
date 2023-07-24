@@ -110,15 +110,20 @@ extension ImagesListViewController: UITableViewDelegate {
 
 extension ImagesListViewController {
     private func fetchPhotosNextPage() {
-        imagesListService.fetchPhotosNextPage { [weak self] error in
+        imagesListService.fetchPhotosNextPage { [weak self] result in
             guard let self = self else { return }
-            let alert = UIAlertController(
-                title: "Не удалось загрузить фото",
-                message: "\(error.localizedDescription)",
-                preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
+            switch result {
+            case .success:
+                return
+            case .failure(let error):
+                let alert = UIAlertController(
+                    title: "Не удалось загрузить фото",
+                    message: "\(error.localizedDescription)",
+                    preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
 }

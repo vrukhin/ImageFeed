@@ -20,7 +20,7 @@ final class ImagesListService {
     private let urlSession = URLSession.shared
     private let path = "/photos"
     
-    func fetchPhotosNextPage(_ completion: @escaping (_ error: Error) -> Void) {
+    func fetchPhotosNextPage(_ completion: @escaping (Result<Void, Error>) -> Void) {
         assert(Thread.isMainThread)
         task?.cancel()
         let nextPage = lastLoadedPage == nil
@@ -46,7 +46,7 @@ final class ImagesListService {
                         userInfo: ["photos":self.photos]
                     )
             case .failure(let error):
-                completion(error)
+                completion(.failure(error))
             }
         }
         self.task = task
