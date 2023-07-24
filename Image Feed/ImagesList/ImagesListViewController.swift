@@ -45,16 +45,7 @@ final class ImagesListViewController: UIViewController {
             }
         
         UIBlockingProgressHUD.show()
-        imagesListService.fetchPhotosNextPage { [weak self] error in
-            guard let self = self else { return }
-            let alert = UIAlertController(
-                title: "Не удалось загрузить фото",
-                message: "\(error.localizedDescription)",
-                preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
-        }
+        fetchPhotosNextPage()
     }
 }
 
@@ -120,16 +111,22 @@ extension ImagesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == photos.count - 1 {
-            imagesListService.fetchPhotosNextPage { [weak self] error in
-                guard let self = self else { return }
-                let alert = UIAlertController(
-                    title: "Не удалось загрузить фото",
-                    message: "\(error.localizedDescription)",
-                    preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default)
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
-            }
+            fetchPhotosNextPage()
+        }
+    }
+}
+
+extension ImagesListViewController {
+    private func fetchPhotosNextPage() {
+        imagesListService.fetchPhotosNextPage { [weak self] error in
+            guard let self = self else { return }
+            let alert = UIAlertController(
+                title: "Не удалось загрузить фото",
+                message: "\(error.localizedDescription)",
+                preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }
