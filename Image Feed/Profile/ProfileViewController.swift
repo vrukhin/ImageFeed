@@ -38,9 +38,24 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc private func exitButtonDidTap(_ sender: UIButton!) {
-        authService.clean()
-        self.window.rootViewController = SplashViewController()
-        self.window.makeKeyAndVisible()
+        
+        let alert = UIAlertController(
+            title: "Пока, пока!",
+            message: "Уверены, что хотите выйти?",
+            preferredStyle: .alert)
+        
+        let confirmExitAction = UIAlertAction(title: "Да", style: .default) { _ in
+            self.authService.clean()
+            self.window.rootViewController = SplashViewController()
+            self.window.makeKeyAndVisible()
+        }
+        
+        let cancelExitAction = UIAlertAction(title: "Нет", style: .default) { _ in }
+        
+        alert.addAction(confirmExitAction)
+        alert.addAction(cancelExitAction)
+        
+        self.present(alert, animated: true)
     }
     
     private func updateProfileDetails() {
