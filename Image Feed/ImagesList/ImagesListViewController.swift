@@ -10,13 +10,7 @@ final class ImagesListViewController: UIViewController {
     
     private let imagesListService = ImagesListService.shared
     private var imagesListServiceObserver: NSObjectProtocol?
-    
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
+    private let dateFormatter = DateFormatterService.shared.outputImageDateFormatter
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == ShowSingleImageSegueIdentifier {
@@ -82,7 +76,12 @@ extension ImagesListViewController {
         else { return }
 
         cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "Stub"))
-        cell.dateLabel.text = dateFormatter.string(from: photos[indexPath.row].createdAt ?? Date())
+        
+        if let date = photos[indexPath.row].createdAt {
+            cell.dateLabel.text = dateFormatter.string(from: date)
+        } else {
+            cell.dateLabel.text = ""
+        }
 
         let likeImage = photos[indexPath.row].isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)

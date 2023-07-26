@@ -16,6 +16,8 @@ struct PhotoResponse: Codable {
     let urls: Dictionary<String, String>
     let isLiked: Bool
     
+    let dateFormatter = DateFormatterService.shared.inputImageDateFormatter
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case width
@@ -28,10 +30,7 @@ struct PhotoResponse: Codable {
     
     func convert() -> Photo {
         let size = CGSize(width: self.width, height: self.height)
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        let createdAt = dateFormatter.date(from: self.createdAt)
+        let createdAt = self.dateFormatter.date(from: self.createdAt)
         
         return Photo(
             id: self.id,
