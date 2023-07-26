@@ -44,7 +44,8 @@ final class ProfileViewController: UIViewController {
             message: "Уверены, что хотите выйти?",
             preferredStyle: .alert)
         
-        let confirmExitAction = UIAlertAction(title: "Да", style: .default) { _ in
+        let confirmExitAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            guard let self = self else { return }
             self.authService.clean()
             self.window.rootViewController = SplashViewController()
             self.window.makeKeyAndVisible()
