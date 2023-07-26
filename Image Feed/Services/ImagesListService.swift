@@ -10,7 +10,7 @@ import Foundation
 final class ImagesListService {
     
     static let shared = ImagesListService()
-    static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     
     private (set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
@@ -41,7 +41,7 @@ final class ImagesListService {
                 self.task = nil
                 NotificationCenter.default
                     .post(
-                        name: ImagesListService.DidChangeNotification,
+                        name: ImagesListService.didChangeNotification,
                         object: self,
                         userInfo: ["photos":self.photos]
                     )

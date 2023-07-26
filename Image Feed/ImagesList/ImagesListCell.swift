@@ -5,7 +5,7 @@ final class ImagesListCell: UITableViewCell {
     
     weak var delegate: ImagesListCellDelegate?
     
-    private enum likeImage: String {
+    private enum LikeImage: String {
         case isLiked = "like_button_on"
         case isNotLiked = "like_button_off"
     }
@@ -26,8 +26,8 @@ final class ImagesListCell: UITableViewCell {
     
     func changeIsLiked(isLiked: Bool) {
         let likeImage = isLiked
-        ? UIImage(named: likeImage.isLiked.rawValue)
-        : UIImage(named: likeImage.isNotLiked.rawValue)
+        ? UIImage(named: LikeImage.isLiked.rawValue)
+        : UIImage(named: LikeImage.isNotLiked.rawValue)
         
         likeButton.setImage(likeImage, for: .normal)
     }
