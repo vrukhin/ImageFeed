@@ -16,6 +16,7 @@ final class ProfileViewController: UIViewController {
     private var usernameLabel: UILabel!
     private var textLabel: UILabel!
     
+    private let authService = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     
@@ -24,7 +25,7 @@ final class ProfileViewController: UIViewController {
         
         profileImageServiceObserver = NotificationCenter.default
             .addObserver(
-                forName: ProfileImageService.DidChangeNotification,
+                forName: ProfileImageService.didChangeNotification,
                 object: nil,
                 queue: .main
             ) { [weak self] _ in
@@ -36,8 +37,26 @@ final class ProfileViewController: UIViewController {
         updateProfileDetails()
     }
     
-    private func exitButtonDidTap() {
+    @objc private func exitButtonDidTap(_ sender: UIButton!) {
         
+        let alert = UIAlertController(
+            title: "Пока, пока!",
+            message: "Уверены, что хотите выйти?",
+            preferredStyle: .alert)
+        
+        let confirmExitAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.authService.clean()
+            self.window.rootViewController = SplashViewController()
+            self.window.makeKeyAndVisible()
+        }
+        
+        let cancelExitAction = UIAlertAction(title: "Нет", style: .default) { _ in }
+        
+        alert.addAction(confirmExitAction)
+        alert.addAction(cancelExitAction)
+        
+        self.present(alert, animated: true)
     }
     
     private func updateProfileDetails() {
@@ -72,6 +91,7 @@ final class ProfileViewController: UIViewController {
         exitButton = UIButton.systemButton(with: buttonImage, target: self, action: nil)
         exitButton.tintColor = .ypRed
         exitButton.translatesAutoresizingMaskIntoConstraints = false
+        exitButton.addTarget(self, action: #selector(self.exitButtonDidTap), for: .touchUpInside)
         view.addSubview(exitButton)
         
         nameLabel = UILabel()

@@ -14,7 +14,7 @@ final class SplashViewController: UIViewController {
     private let ShowAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreenSegue"
     
     private let oauth2Service = OAuth2Service.shared
-    private let oauth2TokenStorage = OAuthTokenStorage()
+    private let oauth2TokenStorage = OAuthTokenStorage.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     
@@ -23,7 +23,7 @@ final class SplashViewController: UIViewController {
         
         createSplashView()
         
-        if let token = OAuthTokenStorage().token {
+        if let token = oauth2TokenStorage.token {
             self.fetchProfile(token: token)
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: .main)

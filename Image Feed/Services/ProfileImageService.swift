@@ -9,12 +9,12 @@ import Foundation
 
 final class ProfileImageService {
     
-    static let DidChangeNotification = Notification.Name("ProfileImageProviderDidChange")
+    static let didChangeNotification = Notification.Name("ProfileImageProviderDidChange")
     
     static let shared = ProfileImageService()
     private(set) var avatarURL: String?
     
-    private let tokenStorage = OAuthTokenStorage()
+    private let tokenStorage = OAuthTokenStorage.shared
     private let path = "/users"
     private let urlSession = URLSession.shared
     
@@ -31,7 +31,7 @@ final class ProfileImageService {
                 completion(.success(user))
                 NotificationCenter.default
                     .post(
-                        name: ProfileImageService.DidChangeNotification,
+                        name: ProfileImageService.didChangeNotification,
                         object: self,
                         userInfo: ["URL":self.avatarURL ?? ""]
                     )

@@ -10,14 +10,21 @@ import SwiftKeychainWrapper
 
 final class OAuthTokenStorage {
     
+    static let shared = OAuthTokenStorage()
+    
     var token: String? {
         get {
             return KeychainWrapper.standard.string(forKey: "Auth token")
         }
         
         set {
-            guard let token = newValue else { return }
+            guard let token = newValue else {
+                KeychainWrapper.standard.removeObject(forKey: "Auth token")
+                return
+            }
             KeychainWrapper.standard.set(token, forKey: "Auth token")
         }
     }
+    
+    private init() {}
 }

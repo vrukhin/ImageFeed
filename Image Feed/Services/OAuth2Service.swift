@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import WebKit
 
 final class OAuth2Service {
     
     static let shared = OAuth2Service()
-    private let tokenStorage = OAuthTokenStorage()
+    private let tokenStorage = OAuthTokenStorage.shared
     
     private let urlSession = URLSession.shared
     
@@ -24,6 +25,16 @@ final class OAuth2Service {
         set {
             return tokenStorage.token = newValue!
         }
+    }
+    
+    func clean() {
+       HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+       WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+          records.forEach { record in
+             WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+          }
+       }
+        tokenStorage.token = nil
     }
     
     private init() { }
