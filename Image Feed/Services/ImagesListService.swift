@@ -90,8 +90,7 @@ extension ImagesListService {
         URLRequest.makeHTTPRequest(
             path: self.path
             + "?page=\(page)",
-            httpMethod: "GET",
-            baseURL: Credentials.DefaultApiUrl
+            httpMethod: "GET"
         )
     }
     
@@ -99,8 +98,7 @@ extension ImagesListService {
         URLRequest.makeHTTPRequest(
             path: self.path
             + "/\(photoId)/like",
-            httpMethod: isLike ? "POST" : "DELETE",
-            baseURL: Credentials.DefaultApiUrl
+            httpMethod: isLike ? "POST" : "DELETE"
         )
     }
 }

@@ -18,12 +18,12 @@ final class WebViewPresenter: WebViewPresenterProtocol {
     var view: WebViewViewControllerProtocol?
     
     func viewDidLoad() {
-        var urlComponents = URLComponents(string: Credentials.UnsplashAuthorizeURLString)!
+        var urlComponents = URLComponents(string: AuthConfiguration.standard.authURLString)!
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: Credentials.AccessKey),
-            URLQueryItem(name: "redirect_uri", value: Credentials.RedirectURI),
+            URLQueryItem(name: "client_id", value: AuthConfiguration.standard.accessKey),
+            URLQueryItem(name: "redirect_uri", value: AuthConfiguration.standard.redirectURI),
             URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: Credentials.AccessScope)
+            URLQueryItem(name: "scope", value: AuthConfiguration.standard.accessScope)
         ]
         let url = urlComponents.url!
         let request = URLRequest(url: url)
