@@ -13,6 +13,7 @@
 		4E89A5C32A6F396200DC6A6D /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89A5C22A6F396200DC6A6D /* UIViewController+Extensions.swift */; };
 		4E89A5C72A711BB500DC6A6D /* DateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89A5C62A711BB500DC6A6D /* DateFormatterService.swift */; };
 		4E89A5CA2A7EA0E000DC6A6D /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89A5C92A7EA0E000DC6A6D /* WebViewPresenter.swift */; };
+		4E89A5CC2A7EB59700DC6A6D /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89A5CB2A7EB59700DC6A6D /* AuthHelper.swift */; };
 		4EB017C52A45FBD900C3BA04 /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB017C42A45FBD900C3BA04 /* AuthConfiguration.swift */; };
 		4EB017C82A478BED00C3BA04 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB017C72A478BED00C3BA04 /* AuthViewController.swift */; };
 		4EB017CA2A478DEA00C3BA04 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB017C92A478DEA00C3BA04 /* WebViewViewController.swift */; };
@@ -57,6 +58,7 @@
 		4E89A5C22A6F396200DC6A6D /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		4E89A5C62A711BB500DC6A6D /* DateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterService.swift; sourceTree = "<group>"; };
 		4E89A5C92A7EA0E000DC6A6D /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
+		4E89A5CB2A7EB59700DC6A6D /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
 		4EB017C42A45FBD900C3BA04 /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		4EB017C72A478BED00C3BA04 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		4EB017C92A478DEA00C3BA04 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				4EB017C92A478DEA00C3BA04 /* WebViewViewController.swift */,
 				4EB017CB2A48B1D200C3BA04 /* WebViewViewControllerDelegate.swift */,
 				4E89A5C92A7EA0E000DC6A6D /* WebViewPresenter.swift */,
+				4E89A5CB2A7EB59700DC6A6D /* AuthHelper.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				4E89A5C72A711BB500DC6A6D /* DateFormatterService.swift in Sources */,
 				7D9CFA4528DDEE7F00D971A7 /* SceneDelegate.swift in Sources */,
 				4E36B2C02A6EDADA00F3B997 /* LikePhotoResponse.swift in Sources */,
+				4E89A5CC2A7EB59700DC6A6D /* AuthHelper.swift in Sources */,
 				4EB017D32A4B7C6700C3BA04 /* OAuthTokenRequestBody.swift in Sources */,
 				4EB017DE2A4E0CFD00C3BA04 /* OAuthTokenStorage.swift in Sources */,
 				4EC0D2D32A33AC4100E8DF3C /* ProfileViewController.swift in Sources */,

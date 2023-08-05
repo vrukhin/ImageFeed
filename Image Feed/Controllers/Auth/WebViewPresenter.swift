@@ -16,34 +16,20 @@ protocol WebViewPresenterProtocol: AnyObject {
 
 final class WebViewPresenter: WebViewPresenterProtocol {
     var view: WebViewViewControllerProtocol?
+    var authHelper: AuthHelperProtocol
+    
+    init(authHelper: AuthHelperProtocol) {
+        self.authHelper = authHelper
+    }
     
     func viewDidLoad() {
-        var urlComponents = URLComponents(string: AuthConfiguration.standard.authURLString)!
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: AuthConfiguration.standard.accessKey),
-            URLQueryItem(name: "redirect_uri", value: AuthConfiguration.standard.redirectURI),
-            URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: AuthConfiguration.standard.accessScope)
-        ]
-        let url = urlComponents.url!
-        let request = URLRequest(url: url)
-        
-        didUpdateProgressValue(0)
-        
+        let request = authHelper.authRequest()
         view?.load(request)
+        didUpdateProgressValue(0)
     }
     
     func code(from url: URL) -> String? {
-        if
-            let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == "/oauth/authorize/native",
-            let items = urlComponents.queryItems,
-            let codeItem = items.first(where: { $0.name == "code" })
-        {
-            return codeItem.value
-        } else {
-            return nil
-        }
+        authHelper.code(from: url)
     }
     
     func didUpdateProgressValue(_ newValue: Double) {
