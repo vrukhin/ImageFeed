@@ -23,6 +23,17 @@ final class WebViewPresenterSpy: WebViewPresenterProtocol {
     }
 }
 
+final class WebViewViewControllerSpy: WebViewViewControllerProtocol {
+    var presenter: WebViewPresenterProtocol?
+    var viewControllerLoadRequestCalled: Bool = false
+    
+    func load(_ request: URLRequest) {
+        viewControllerLoadRequestCalled = true
+    }
+    func setProgressValue(_ newValue: Float) {}
+    func setProgressHidden(_ isHidden: Bool) {}
+}
+
 final class WebViewTests: XCTestCase {
     func testViewControllerCallsViewDidLoad() {
         //given
@@ -37,5 +48,20 @@ final class WebViewTests: XCTestCase {
         
         //then
         XCTAssertTrue(presenter.viewDidLoadCalled)
+    }
+    
+    func testPresenterCallsLoadRequest() {
+        //given
+        let viewController = WebViewViewControllerSpy()
+        let authHelper = AuthHelper()
+        let presenter = WebViewPresenter(authHelper: authHelper)
+        viewController.presenter = presenter
+        presenter.view = viewController
+        
+        //when
+        presenter.viewDidLoad()
+        
+        //then
+        XCTAssertTrue(viewController.viewControllerLoadRequestCalled)
     }
 }
