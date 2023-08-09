@@ -8,20 +8,29 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+protocol ProfileViewControllerProtocol: AnyObject {
+    var presenter: ProfileViewPresenterProtocol? { get set }
+    
+    func updateAvatar()
+    func updateProfileDetails()
+}
 
+final class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
+
+    var presenter: ProfileViewPresenterProtocol?
+    
     private var avatarImage: UIImageView!
     private var exitButton: UIButton!
     private var nameLabel: UILabel!
     private var usernameLabel: UILabel!
     private var textLabel: UILabel!
     
-    private let authService = OAuth2Service.shared
-    private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter = ProfileViewPresenter(view: self)
         
         profileImageServiceObserver = NotificationCenter.default
             .addObserver(
@@ -32,8 +41,10 @@ final class ProfileViewController: UIViewController {
                 guard let self = self else { return }
                 updateAvatar()
             }
+        
         createProfileView()
         createConstraints()
+        
         updateProfileDetails()
     }
     
@@ -46,7 +57,8 @@ final class ProfileViewController: UIViewController {
         
         let confirmExitAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
             guard let self = self else { return }
-            self.authService.clean()
+            presenter?.cleanAuthData()
+            
             self.window.rootViewController = SplashViewController()
             self.window.makeKeyAndVisible()
         }
@@ -59,22 +71,19 @@ final class ProfileViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    private func updateProfileDetails() {
-        if let profile = profileService.profile {
+    func updateProfileDetails() {
+        if let profile = presenter?.getProfileDetails() {
             nameLabel.text = profile.name
             usernameLabel.text = profile.login
             textLabel.text = profile.bio
         }
+        
         updateAvatar()
     }
     
-    private func updateAvatar() {
-        guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL)
-        else { return }
+    func updateAvatar() {
         avatarImage.kf.setImage(
-            with: url,
+            with: presenter?.getAvatarUrl(),
             placeholder: UIImage(systemName: "person.crop.circle.fill")
         )
     }
