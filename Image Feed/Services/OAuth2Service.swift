@@ -76,7 +76,8 @@ extension OAuth2Service {
             + "&&redirect_uri=\(AuthConfiguration.standard.redirectURI)"
             + "&&code=\(code)"
             + "&&grant_type=authorization_code",
-            httpMethod: "POST"
+            httpMethod: "POST",
+            baseURL: URL(string: "https://unsplash.com")!
         )
     }
 }
