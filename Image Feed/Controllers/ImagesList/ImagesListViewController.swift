@@ -20,8 +20,6 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
 
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
-    private let dateFormatter = DateFormatterService.shared.outputImageDateFormatter
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {
             guard
@@ -73,20 +71,14 @@ extension ImagesListViewController: UITableViewDataSource {
 extension ImagesListViewController {
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        guard
-            let imageURL = presenter.photos[indexPath.row].thumbImageURL,
-            let url = URL(string: imageURL)
-        else { return }
+        
+        let photoData = presenter.getPhotoData(for: indexPath)
+        
+        guard let url = photoData.thumbImageURL else { return }
 
         cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "Stub"))
-        
-        if let date = presenter.photos[indexPath.row].createdAt {
-            cell.dateLabel.text = dateFormatter.string(from: date)
-        } else {
-            cell.dateLabel.text = ""
-        }
-
-        cell.changeIsLiked(isLiked: presenter!.photos[indexPath.row].isLiked)
+        cell.dateLabel.text = photoData.createdAt
+        cell.changeIsLiked(isLiked: photoData.isLiked)
     }
 }
 

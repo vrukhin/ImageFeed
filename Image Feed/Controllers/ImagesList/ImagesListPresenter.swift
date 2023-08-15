@@ -16,6 +16,7 @@ protocol ImagesListPresenterProtocol: AnyObject {
     func changeLike(cell: ImagesListCell, indexPath: IndexPath)
     func updateTableView()
     func createImagesListServiceObserver()
+    func getPhotoData(for cell: IndexPath) -> CellData
 }
 
 final class ImagesListPresenter: ImagesListPresenterProtocol {
@@ -25,6 +26,7 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     var photos: [Photo] = []
     
     private let imagesListService = ImagesListService.shared
+    private let dateFormatter = DateFormatterService.shared.outputImageDateFormatter
     
     init(view: ImagesListViewControllerProtocol) {
         self.view = view
@@ -40,6 +42,24 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
                 guard let self = self else { return }
                 view?.didReceiveImagesListServiceNotification()
             }
+    }
+    
+    func getPhotoData(for cell: IndexPath) -> CellData {
+        var imageUrl: URL?
+        var createdAt = ""
+        var isLiked = false
+        
+        if let url = photos[cell.row].thumbImageURL {
+            imageUrl = URL(string: url)
+        }
+        
+        if let date = photos[cell.row].createdAt {
+            createdAt = dateFormatter.string(from: date)
+        }
+        
+        isLiked = photos[cell.row].isLiked
+        
+        return CellData(thumbImageURL: imageUrl, createdAt: createdAt, isLiked: isLiked)
     }
     
     func fetchPhotosNextPage() {
