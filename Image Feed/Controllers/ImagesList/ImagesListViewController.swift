@@ -3,6 +3,7 @@ import UIKit
 protocol ImagesListViewControllerProtocol: AnyObject {
     var presenter: ImagesListPresenterProtocol! { get set }
     
+    func didReceiveImagesListServiceNotification()
     func showImageDownloadErrorAlert(_ error: Error)
     func showImageLikeError(_ error: Error)
     func lockUI()
@@ -19,7 +20,6 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
 
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
-    private var imagesListServiceObserver: NSObjectProtocol?
     private let dateFormatter = DateFormatterService.shared.outputImageDateFormatter
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,21 +40,11 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
         super.viewDidLoad()
         
         presenter = ImagesListPresenter(view: self)
+        presenter.createImagesListServiceObserver()
         
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         
-        imagesListServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: ImagesListService.didChangeNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                guard let self = self else { return }
-                updateTableViewAnimated()
-                UIBlockingProgressHUD.dismiss()
-            }
-        
-        UIBlockingProgressHUD.show()
+        lockUI()
         presenter.fetchPhotosNextPage()
     }
 }
@@ -124,6 +114,11 @@ extension ImagesListViewController: UITableViewDelegate {
 }
 
 extension ImagesListViewController {
+    
+    func didReceiveImagesListServiceNotification() {
+        updateTableViewAnimated()
+        unlockUI()
+    }
     
     func updateTableView(indexPaths: [IndexPath]) {
         tableView.performBatchUpdates {

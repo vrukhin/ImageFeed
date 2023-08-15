@@ -9,23 +9,37 @@ import Foundation
 
 protocol ImagesListPresenterProtocol: AnyObject {
     var view: ImagesListViewControllerProtocol? { get }
-    var imagesListService: ImagesListService { get }
     var photos: [Photo] { get set }
+    var imagesListServiceObserver: NSObjectProtocol? { get }
     
     func fetchPhotosNextPage()
     func changeLike(cell: ImagesListCell, indexPath: IndexPath)
     func updateTableView()
+    func createImagesListServiceObserver()
 }
 
 final class ImagesListPresenter: ImagesListPresenterProtocol {
     weak var view: ImagesListViewControllerProtocol?
+    var imagesListServiceObserver: NSObjectProtocol?
     
     var photos: [Photo] = []
     
-    let imagesListService = ImagesListService.shared
+    private let imagesListService = ImagesListService.shared
     
     init(view: ImagesListViewControllerProtocol) {
         self.view = view
+    }
+    
+    func createImagesListServiceObserver() {
+        imagesListServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ImagesListService.didChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                view?.didReceiveImagesListServiceNotification()
+            }
     }
     
     func fetchPhotosNextPage() {
