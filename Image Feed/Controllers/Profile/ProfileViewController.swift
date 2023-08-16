@@ -25,22 +25,10 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
     private var usernameLabel: UILabel!
     private var textLabel: UILabel!
     
-    private var profileImageServiceObserver: NSObjectProtocol?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         presenter = ProfileViewPresenter(view: self)
-        
-        profileImageServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: ProfileImageService.didChangeNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                guard let self = self else { return }
-                updateAvatar()
-            }
         
         createProfileView()
         createConstraints()
