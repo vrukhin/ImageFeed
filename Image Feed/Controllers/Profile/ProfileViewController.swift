@@ -28,7 +28,9 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = ProfileViewPresenter(view: self)
+        if presenter == nil {
+            presenter = ProfileViewPresenter(view: self)
+        }
         
         createProfileView()
         createConstraints()

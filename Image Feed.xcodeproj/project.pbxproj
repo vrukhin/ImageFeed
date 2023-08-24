@@ -11,6 +11,7 @@
 		4E36B2C22A6F0DEA00F3B997 /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36B2C12A6F0DEA00F3B997 /* ImagesListCellDelegate.swift */; };
 		4E6FB7A72A34392D002185B3 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6FB7A62A34392D002185B3 /* SingleImageViewController.swift */; };
 		4E8481EE2A9798C100B7508A /* ImagesListViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8481ED2A9798C100B7508A /* ImagesListViewTests.swift */; };
+		4E8481F02A97B18900B7508A /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8481EF2A97B18900B7508A /* ProfileViewTests.swift */; };
 		4E89A5C32A6F396200DC6A6D /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89A5C22A6F396200DC6A6D /* UIViewController+Extensions.swift */; };
 		4E89A5C72A711BB500DC6A6D /* DateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89A5C62A711BB500DC6A6D /* DateFormatterService.swift */; };
 		4E89A5CA2A7EA0E000DC6A6D /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89A5C92A7EA0E000DC6A6D /* WebViewPresenter.swift */; };
@@ -79,6 +80,7 @@
 		4E36B2C12A6F0DEA00F3B997 /* ImagesListCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegate.swift; sourceTree = "<group>"; };
 		4E6FB7A62A34392D002185B3 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		4E8481ED2A9798C100B7508A /* ImagesListViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewTests.swift; sourceTree = "<group>"; };
+		4E8481EF2A97B18900B7508A /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
 		4E89A5C22A6F396200DC6A6D /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		4E89A5C62A711BB500DC6A6D /* DateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterService.swift; sourceTree = "<group>"; };
 		4E89A5C92A7EA0E000DC6A6D /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			children = (
 				4E89A5D32A7EBA8800DC6A6D /* WebViewTests.swift */,
 				4E8481ED2A9798C100B7508A /* ImagesListViewTests.swift */,
+				4E8481EF2A97B18900B7508A /* ProfileViewTests.swift */,
 			);
 			path = "Image FeedTests";
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E8481EE2A9798C100B7508A /* ImagesListViewTests.swift in Sources */,
+				4E8481F02A97B18900B7508A /* ProfileViewTests.swift in Sources */,
 				4E89A5D42A7EBA8800DC6A6D /* WebViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
