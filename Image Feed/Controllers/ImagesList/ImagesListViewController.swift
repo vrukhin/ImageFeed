@@ -37,10 +37,14 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = ImagesListPresenter(view: self)
+        if presenter == nil {
+            presenter = ImagesListPresenter(view: self)
+        }
         presenter.createImagesListServiceObserver()
         
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        if let tableView = tableView {
+            tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        }
         
         lockUI()
         presenter.fetchPhotosNextPage()
