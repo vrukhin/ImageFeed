@@ -42,6 +42,7 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
             title: "Пока, пока!",
             message: "Уверены, что хотите выйти?",
             preferredStyle: .alert)
+        alert.view.accessibilityIdentifier = "Bye bye!"
         
         let confirmExitAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
             guard let self = self else { return }
@@ -50,6 +51,7 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
             self.window.rootViewController = SplashViewController()
             self.window.makeKeyAndVisible()
         }
+        confirmExitAction.accessibilityIdentifier = "Yes"
         
         let cancelExitAction = UIAlertAction(title: "Нет", style: .default) { _ in }
         
@@ -86,6 +88,7 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
 
         let buttonImage = UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage()
         exitButton = UIButton.systemButton(with: buttonImage, target: self, action: nil)
+        exitButton.accessibilityIdentifier = "logout button"
         exitButton.tintColor = .ypRed
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         exitButton.addTarget(self, action: #selector(self.exitButtonDidTap), for: .touchUpInside)
