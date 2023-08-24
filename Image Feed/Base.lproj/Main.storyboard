@@ -266,6 +266,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVA-1c-qlV">
                                 <rect key="frame" x="8" y="56" width="24" height="24"/>
+                                <accessibility key="accessibilityConfiguration" identifier="nav back button white"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="L8P-lI-lF1"/>
                                     <constraint firstAttribute="height" constant="24" id="h2F-cq-nSe"/>

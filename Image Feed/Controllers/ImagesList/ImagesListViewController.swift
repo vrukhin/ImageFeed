@@ -99,7 +99,11 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == presenter.photos.count - 1 {
+        if
+            let visibleRows = tableView.indexPathsForVisibleRows,
+            indexPath == visibleRows.last,
+            indexPath.row == presenter.photos.count - 1
+        {
             presenter.fetchPhotosNextPage()
         }
     }
