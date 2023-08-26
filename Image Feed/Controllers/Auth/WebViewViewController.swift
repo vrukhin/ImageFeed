@@ -28,7 +28,9 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
         super.viewDidLoad()
         webView.accessibilityIdentifier = "UnsplashWebView"
         
-        presenter = WebViewPresenter(authHelper: AuthHelper())
+        if presenter == nil {
+            presenter = WebViewPresenter(authHelper: AuthHelper())
+        }
         presenter?.view = self
         
         estimatedProgressObservation = webView.observe(
