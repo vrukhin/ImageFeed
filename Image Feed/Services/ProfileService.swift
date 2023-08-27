@@ -38,6 +38,6 @@ final class ProfileService {
 extension ProfileService {
     
     private func profileRequest(token: String) -> URLRequest {
-        URLRequest.makeHTTPRequest(path: self.path, httpMethod: "GET", baseURL: Credentials.DefaultApiUrl)
+        URLRequest.makeHTTPRequest(path: self.path, httpMethod: "GET")
     }
 }

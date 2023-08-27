@@ -8,32 +8,33 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+protocol ProfileViewControllerProtocol: AnyObject {
+    var presenter: ProfileViewPresenterProtocol? { get set }
+    
+    func updateAvatar()
+    func updateProfileDetails()
+}
 
+final class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
+
+    var presenter: ProfileViewPresenterProtocol?
+    
     private var avatarImage: UIImageView!
     private var exitButton: UIButton!
     private var nameLabel: UILabel!
     private var usernameLabel: UILabel!
     private var textLabel: UILabel!
     
-    private let authService = OAuth2Service.shared
-    private let profileService = ProfileService.shared
-    private var profileImageServiceObserver: NSObjectProtocol?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        profileImageServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: ProfileImageService.didChangeNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                guard let self = self else { return }
-                updateAvatar()
-            }
+        if presenter == nil {
+            presenter = ProfileViewPresenter(view: self)
+        }
+        
         createProfileView()
         createConstraints()
+        
         updateProfileDetails()
     }
     
@@ -43,13 +44,16 @@ final class ProfileViewController: UIViewController {
             title: "Пока, пока!",
             message: "Уверены, что хотите выйти?",
             preferredStyle: .alert)
+        alert.view.accessibilityIdentifier = "Bye bye!"
         
         let confirmExitAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
             guard let self = self else { return }
-            self.authService.clean()
+            presenter?.cleanAuthData()
+            
             self.window.rootViewController = SplashViewController()
             self.window.makeKeyAndVisible()
         }
+        confirmExitAction.accessibilityIdentifier = "Yes"
         
         let cancelExitAction = UIAlertAction(title: "Нет", style: .default) { _ in }
         
@@ -59,22 +63,19 @@ final class ProfileViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    private func updateProfileDetails() {
-        if let profile = profileService.profile {
+    func updateProfileDetails() {
+        if let profile = presenter?.getProfileDetails() {
             nameLabel.text = profile.name
             usernameLabel.text = profile.login
             textLabel.text = profile.bio
         }
+        
         updateAvatar()
     }
     
-    private func updateAvatar() {
-        guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL)
-        else { return }
+    func updateAvatar() {
         avatarImage.kf.setImage(
-            with: url,
+            with: presenter?.getAvatarUrl(),
             placeholder: UIImage(systemName: "person.crop.circle.fill")
         )
     }
@@ -89,6 +90,7 @@ final class ProfileViewController: UIViewController {
 
         let buttonImage = UIImage(systemName: "ipad.and.arrow.forward") ?? UIImage()
         exitButton = UIButton.systemButton(with: buttonImage, target: self, action: nil)
+        exitButton.accessibilityIdentifier = "logout button"
         exitButton.tintColor = .ypRed
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         exitButton.addTarget(self, action: #selector(self.exitButtonDidTap), for: .touchUpInside)

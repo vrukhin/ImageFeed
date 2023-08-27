@@ -48,6 +48,6 @@ final class ProfileImageService {
 extension ProfileImageService {
     
     func profileImageURLRequest(path: String) -> URLRequest {
-        URLRequest.makeHTTPRequest(path: path, httpMethod: "GET", baseURL: Credentials.DefaultApiUrl)
+        URLRequest.makeHTTPRequest(path: path, httpMethod: "GET")
     }
 }
